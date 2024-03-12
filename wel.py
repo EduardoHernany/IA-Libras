@@ -14,7 +14,7 @@ classes = ['A', 'B', 'C' ,'D',
 'E' 'F', 'G','I', 'L''M', 'N',  'O', 'P', 'Q', 'R', 
  'S', 'T', 'U', 'V', 'W', 'Y']
 
-model = load_model('model_epoch_48_98.6_final.h5')
+model = load_model('sign_language_model_processed_64x64.h5')
 data = np.ndarray(shape=(1, 64, 64, 3), dtype=np.float32)
 
 def predictor(test_image):
@@ -22,6 +22,18 @@ def predictor(test_image):
        test_image = np.expand_dims(test_image, axis = 0)
        result = model.predict(test_image)
        return result
+
+def process_image(img):
+    # Converter para escala de cinza
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # Aplicar o filtro de Canny
+    edges = cv2.Canny(gray, 100, 200)
+    # Converter as bordas detectadas para uma máscara de 3 canais
+    mask = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
+    # Remover o fundo
+    img_no_bg = cv2.bitwise_and(img, mask)
+
+    return cv2.blur(img_no_bg, (1, 1))
 
 
 while True:
@@ -52,11 +64,11 @@ while True:
             try:
                 imgCrop = img[y_min-60:y_max+60,x_min-60:x_max+60]
                 imgCrop = cv2.resize(imgCrop, (64, 64))
-                imgCrop = cv2.cvtColor(imgCrop,cv2.COLOR_BGR2GRAY)
+                imgCrop = process_image(imgCrop)
                 cv2.imshow("crop", imgCrop)
                 prediction = predictor(imgCrop)
-                indexVal = np.argmax(prediction)
                 print(prediction)
+                indexVal = np.argmax(prediction)
                 cv2.putText(img,classes[indexVal],(x_min-50,y_min-65),cv2.FONT_HERSHEY_COMPLEX,3,(0,0,255),5)
 
             except:
