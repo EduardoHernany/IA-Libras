@@ -6,6 +6,7 @@ from tensorflow.keras.optimizers import Adam
 
 # Caminho para o diretório com as imagens processadas
 dataset_dir = "/home/eduardo/Documentos/IA/Letras_Processed"
+dataset_validation_dir = "/home/eduardo/Documentos/IA/Letras_Processed"
 
 # Parâmetros de pré-processamento
 image_size = (64, 64)  # Tamanho das imagens para o treinamento
@@ -26,7 +27,7 @@ train_generator = train_datagen.flow_from_directory(
 )
 
 validation_generator = train_datagen.flow_from_directory(
-    dataset_dir,
+    dataset_validation_dir,
     target_size=image_size,
     batch_size=batch_size,
     class_mode='categorical',

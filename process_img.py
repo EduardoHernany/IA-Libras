@@ -35,7 +35,7 @@ def process_dataset(input_dir, output_dir):
                     print(f"Processed {image_path} -> {output_path}")
 
 # Definir o diretório de entrada e de saída
-input_dir = '/home/eduardo/Documentos/IA/Letras'
-output_dir = '/home/eduardo/Documentos/IA/Letras_Processed'
+input_dir = '/home/eduardo/Documentos/IA/test'
+output_dir = '/home/eduardo/Documentos/IA/test_process'
 
 process_dataset(input_dir, output_dir)
