@@ -5,8 +5,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
 
 # Caminho para o diretório com as imagens processadas
-dataset_dir = "/home/eduardo/Documentos/IA/Letras_Processed"
-dataset_validation_dir = "/home/eduardo/Documentos/IA/Letras_Processed"
+dataset_dir = "/datasets/train"
+dataset_validation_dir = "/datasets/val"
 
 # Parâmetros de pré-processamento
 image_size = (64, 64)  # Tamanho das imagens para o treinamento
@@ -42,7 +42,7 @@ model = Sequential([
     Conv2D(64, (3, 3), activation='relu'),
     MaxPooling2D(2, 2),
     Flatten(),
-    Dense(512, activation='relu'),
+    Dense(254, activation='relu'),
     Dropout(0.5),
     Dense(len(train_generator.class_indices), activation='softmax')
 ])
