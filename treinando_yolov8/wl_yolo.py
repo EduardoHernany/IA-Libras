@@ -9,7 +9,7 @@ cap = cv2.VideoCapture(0)
 
 hands = mp.solutions.hands.Hands(max_num_hands=1)
 
-model = YOLO("runs/classify/train4/weights/last.pt")
+model = YOLO("runs/classify/train/weights/last.pt")
 
 def predictor(test_image):
        return model(test_image)
@@ -59,7 +59,6 @@ while True:
                 cv2.imshow("crop", imgCrop)
                 prediction = predictor(imgCrop)
                 cv2.putText(img,prediction[0].names[prediction[0].probs.top1],(x_min-50,y_min-65),cv2.FONT_HERSHEY_COMPLEX,3,(0,0,255),5)
-
             except:
                 continue
 
