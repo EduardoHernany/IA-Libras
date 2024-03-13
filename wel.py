@@ -10,11 +10,10 @@ cap = cv2.VideoCapture(0)
 
 hands = mp.solutions.hands.Hands(max_num_hands=1)
 
-classes = ['A', 'B', 'C' ,'D', 
-'E' 'F', 'G','I', 'L''M', 'N',  'O', 'P', 'Q', 'R', 
- 'S', 'T', 'U', 'V', 'W', 'Y']
+classes = ["A",  "B",  "C",  "D",  "E",  "F",  "G",  "I",  "L",  "M",  "N",  "O",  "P",  "Q",  "R",  "S",  "T",  "U",  "V",  "W", "Y"]
 
-model = load_model('sign_language_model_processed_64x64.h5')
+
+model = load_model('sign_language_model_processed_64x64_3.h5')
 data = np.ndarray(shape=(1, 64, 64, 3), dtype=np.float32)
 
 def predictor(test_image):
@@ -32,8 +31,8 @@ def process_image(img):
     mask = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
     # Remover o fundo
     img_no_bg = cv2.bitwise_and(img, mask)
-
-    return cv2.blur(img_no_bg, (1, 1))
+    blurimg = cv2.blur(img, (3, 3) )
+    return img
 
 
 while True:
