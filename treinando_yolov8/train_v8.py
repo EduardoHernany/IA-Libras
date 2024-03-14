@@ -10,7 +10,7 @@ def main():
     model = YOLO("yolov8m-cls.pt")  # load a pretrained model (recommended for training)
 
     # Use the model
-    model.train(data="../datasets", epochs=50, device=0, imgsz=64, batch=64)  # train the model
+    model.train(data="../datasets", epochs=150, device=0, imgsz=64, batch=64)  # train the model
     metrics = model.val()  # evaluate model performance on the validation set
     # results = model("https://ultralytics.com/images/bus.jpg")  # predict on an image
     # path = model.export(format="onnx")  # export the model to ONNX format
