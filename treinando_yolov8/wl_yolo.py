@@ -9,7 +9,7 @@ cap = cv2.VideoCapture(0)
 
 hands = mp.solutions.hands.Hands(max_num_hands=1)
 
-model = YOLO("runs/classify/train/weights/last.pt")
+model = YOLO("runs/classify/train3/weights/last.pt")
 
 def predictor(test_image):
        return model(test_image)
