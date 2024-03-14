@@ -16,6 +16,14 @@ def process_image(image_path, output_path):
     # Salvar a imagem processada
     cv2.imwrite(output_path, img_no_bg)
 
+
+def resize_img(image_path, output_path):
+    # Ler a imagem
+    img = cv2.imread(image_path)
+    img = cv2.resize(img, (64, 64))
+    cv2.imwrite(output_path, img)
+
+
 def process_dataset(input_dir, output_dir):
     input_dir_path = Path(input_dir)
     output_dir_path = Path(output_dir)
@@ -27,15 +35,16 @@ def process_dataset(input_dir, output_dir):
             class_output_dir.mkdir(parents=True, exist_ok=True)
             
             for image_path in class_dir.iterdir():
-                if image_path.is_file():
+                print(image_path)
+                if image_path.is_file() and str(image_path).split(".")[-1]  == "jpg" :
                     # Definir o caminho de saída para a imagem processada
                     output_path = class_output_dir / image_path.name
                     # Processar a imagem
-                    process_image(str(image_path), str(output_path))
+                    resize_img(str(image_path), str(output_path))
                     print(f"Processed {image_path} -> {output_path}")
 
 # Definir o diretório de entrada e de saída
-input_dir = '/home/eduardo/Documentos/IA/test'
-output_dir = '/home/eduardo/Documentos/IA/test_process'
+input_dir = '/media/william/NVME/projects/IA-Libras/datasets/biankatpas-Brazilian-Sign-Language-Alphabet-Dataset-71fe728/dataset' 
+output_dir = '/media/william/NVME/projects/IA-Libras/datasets/train'
 
-process_dataset(input_dir, output_dir)
+#process_dataset(input_dir, output_dir)
